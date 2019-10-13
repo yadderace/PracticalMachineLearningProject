@@ -3,7 +3,10 @@ title: "Practical Machine Learning"
 author: "Yadder Aceituno"
 date: "August 19, 2019"
 output:
-  html_document: default
+  html_document:
+    pandoc_args: [
+        "--output=index.html"
+    ]
   pdf_document: default
 ---
 
@@ -13,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Libraries
 
-```{r libraries}
+```{r libraries, message=FALSE}
 
 library(caret)
 library(corrplot)
@@ -23,7 +26,7 @@ library(rattle)
 
 ## Overview
 
-Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, the goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways.
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement. A group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, the goal will be to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants. They were asked to perform barbell lifts correctly and incorrectly in 5 different ways.
 
 The goal is to predict the manner they did the different excercises. There is a variable called classe which stores 5 different classes:
 
@@ -35,23 +38,10 @@ The goal is to predict the manner they did the different excercises. There is a 
 
 We'll build different prediction models to compare them and decide which model is the best to predict the variable classe.
 
-<style>
-  .col2 {
-    columns: 2 200px;         /* number of columns and width in pixels*/
-    -webkit-columns: 2 200px; /* chrome, safari */
-    -moz-columns: 2 200px;    /* firefox */
-  }
-  .col3 {
-    columns: 3 100px;
-    -webkit-columns: 3 100px;
-    -moz-columns: 3 100px;
-  }
-</style>
 
-<div class="col2">
 ## Getting Data
 
-The data comes from 
+The data comes from this source: http://web.archive.org/web/20161224072740/http:/groupware.les.inf.puc-rio.br/har.
 
 Getting the testing and training data
 
@@ -147,7 +137,6 @@ corrplot(corMatrix, order = "FPC", method = "color", type = "lower",
 
 In the previous plot we can see that there are not much correlations between variables. We can procede to build the models using the variables that we have already.
 
-</div>
 
 ## Building Models
 
@@ -221,4 +210,4 @@ prediction
 
 ```
 
-We can see the result for our prediction with 99% of accuracy, which is a good prediction for our testing data.
+We can see the final prediction for testing data with 99% of accuracy using random forest as method to build the prediction model. 
